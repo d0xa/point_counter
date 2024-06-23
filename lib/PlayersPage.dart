@@ -62,8 +62,9 @@ class PlayersPageState extends State<PlayersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Players Screen"),
-        backgroundColor: Colors.red,
+        title: Text("Chacho's Point Counter"),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Row(
