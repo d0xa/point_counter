@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class PlayersPage extends StatefulWidget {
-  int numberOfPlayers;
-  PlayersPage({super.key, required this.numberOfPlayers});
+  final int numberOfPlayers;
+  final List<String> playerNames;
+
+  PlayersPage(
+      {super.key, required this.numberOfPlayers, required this.playerNames});
 
   @override
   State<StatefulWidget> createState() {
@@ -62,9 +65,8 @@ class PlayersPageState extends State<PlayersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chacho's Point Counter"),
-        centerTitle: true,
-        backgroundColor: Colors.blue,
+        title: Text("Players Screen"),
+        backgroundColor: Colors.red,
       ),
       body: SingleChildScrollView(
         child: Row(
@@ -73,7 +75,7 @@ class PlayersPageState extends State<PlayersPage> {
             widget.numberOfPlayers,
             (index) => Column(
               children: [
-                Text('Player ${index + 1}'),
+                Text(widget.playerNames[index]),
                 const SizedBox(height: 10),
                 Column(
                   children: [
@@ -97,6 +99,22 @@ class PlayersPageState extends State<PlayersPage> {
                                 onChanged: (newValue) {
                                   setState(() {
                                     playerValues[index] = newValue;
+                                  });
+                                },
+                                onSubmitted: (value) {
+                                  setState(() {
+                                    int newValue =
+                                        int.tryParse(playerValues[index]) ?? 0;
+                                    playerTotal[index] += newValue;
+                                    playerHistory[index]
+                                        .add(playerTotal[index]);
+                                    playerValues[index] =
+                                        '0'; // Reset the input field to '0'
+                                    inputVisible[index] =
+                                        false; // Hide the current input row
+                                    controllers[index]
+                                        .clear(); // Clear the TextField
+                                    _closeKeyboard(); // Close the keyboard
                                   });
                                 },
                                 decoration: const InputDecoration(
@@ -159,6 +177,20 @@ class PlayersPageState extends State<PlayersPage> {
                                 onChanged: (newValue) {
                                   setState(() {
                                     playerValues[index] = newValue;
+                                  });
+                                },
+                                onSubmitted: (value) {
+                                  setState(() {
+                                    int newValue =
+                                        int.tryParse(playerValues[index]) ?? 0;
+                                    playerTotal[index] += newValue;
+                                    playerHistory[index]
+                                        .add(playerTotal[index]);
+                                    playerValues[index] =
+                                        '0'; // Reset the input field to '0'
+                                    controllers[index]
+                                        .clear(); // Clear the TextField
+                                    _closeKeyboard(); // Close the keyboard
                                   });
                                 },
                                 decoration: const InputDecoration(

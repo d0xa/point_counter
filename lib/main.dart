@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'PlayersPage.dart';
+import 'package:point_counter/PlayersNamePage.dart';
+// import 'PlayerNamesPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,12 +47,12 @@ class _PlayerSelectionScreenState extends State<PlayerSelectionScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                if (numberOfPlayers > 0 ) {
+                if (numberOfPlayers > 0) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          PlayersPage(numberOfPlayers: numberOfPlayers),
+                          PlayerNamesPage(numberOfPlayers: numberOfPlayers),
                     ),
                   );
                 }
